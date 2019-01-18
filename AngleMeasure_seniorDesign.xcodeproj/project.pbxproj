@@ -8,20 +8,28 @@
 
 /* Begin PBXBuildFile section */
 		D84B42CB21EF94A9009D4260 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84B42CA21EF94A9009D4260 /* AppDelegate.swift */; };
-		D84B42CD21EF94A9009D4260 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84B42CC21EF94A9009D4260 /* ViewController.swift */; };
+		D84B42CD21EF94A9009D4260 /* PatientsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84B42CC21EF94A9009D4260 /* PatientsController.swift */; };
 		D84B42D021EF94A9009D4260 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D84B42CE21EF94A9009D4260 /* Main.storyboard */; };
 		D84B42D221EF94AA009D4260 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D84B42D121EF94AA009D4260 /* Assets.xcassets */; };
 		D84B42D521EF94AA009D4260 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D84B42D321EF94AA009D4260 /* LaunchScreen.storyboard */; };
+		D883031221F26CEA00E57471 /* UIViewController+helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D883031121F26CEA00E57471 /* UIViewController+helpers.swift */; };
+		D883031521F275FC00E57471 /* SessionsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D883031421F275FC00E57471 /* SessionsController.swift */; };
+		D883031821F27BD300E57471 /* MeasurementsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D883031721F27BD300E57471 /* MeasurementsController.swift */; };
+		D883031A21F27EF500E57471 /* MeasurementController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D883031921F27EF500E57471 /* MeasurementController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		D84B42C721EF94A9009D4260 /* AngleMeasure_seniorDesign.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AngleMeasure_seniorDesign.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D84B42CA21EF94A9009D4260 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		D84B42CC21EF94A9009D4260 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		D84B42CC21EF94A9009D4260 /* PatientsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientsController.swift; sourceTree = "<group>"; };
 		D84B42CF21EF94A9009D4260 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D84B42D121EF94AA009D4260 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D84B42D421EF94AA009D4260 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D84B42D621EF94AA009D4260 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D883031121F26CEA00E57471 /* UIViewController+helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+helpers.swift"; sourceTree = "<group>"; };
+		D883031421F275FC00E57471 /* SessionsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionsController.swift; sourceTree = "<group>"; };
+		D883031721F27BD300E57471 /* MeasurementsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementsController.swift; sourceTree = "<group>"; };
+		D883031921F27EF500E57471 /* MeasurementController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,13 +63,57 @@
 			isa = PBXGroup;
 			children = (
 				D84B42CA21EF94A9009D4260 /* AppDelegate.swift */,
-				D84B42CC21EF94A9009D4260 /* ViewController.swift */,
+				D883030F21F269D300E57471 /* Patients */,
+				D883031321F275DE00E57471 /* Sessions */,
+				D883031621F27BA500E57471 /* Measurements */,
+				D883031B21F2802900E57471 /* Measurement */,
+				D883031021F26CAF00E57471 /* Helpers */,
 				D84B42CE21EF94A9009D4260 /* Main.storyboard */,
 				D84B42D121EF94AA009D4260 /* Assets.xcassets */,
 				D84B42D321EF94AA009D4260 /* LaunchScreen.storyboard */,
 				D84B42D621EF94AA009D4260 /* Info.plist */,
 			);
 			path = AngleMeasure_seniorDesign;
+			sourceTree = "<group>";
+		};
+		D883030F21F269D300E57471 /* Patients */ = {
+			isa = PBXGroup;
+			children = (
+				D84B42CC21EF94A9009D4260 /* PatientsController.swift */,
+			);
+			path = Patients;
+			sourceTree = "<group>";
+		};
+		D883031021F26CAF00E57471 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				D883031121F26CEA00E57471 /* UIViewController+helpers.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		D883031321F275DE00E57471 /* Sessions */ = {
+			isa = PBXGroup;
+			children = (
+				D883031421F275FC00E57471 /* SessionsController.swift */,
+			);
+			path = Sessions;
+			sourceTree = "<group>";
+		};
+		D883031621F27BA500E57471 /* Measurements */ = {
+			isa = PBXGroup;
+			children = (
+				D883031721F27BD300E57471 /* MeasurementsController.swift */,
+			);
+			path = Measurements;
+			sourceTree = "<group>";
+		};
+		D883031B21F2802900E57471 /* Measurement */ = {
+			isa = PBXGroup;
+			children = (
+				D883031921F27EF500E57471 /* MeasurementController.swift */,
+			);
+			path = Measurement;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -135,7 +187,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D84B42CD21EF94A9009D4260 /* ViewController.swift in Sources */,
+				D883031A21F27EF500E57471 /* MeasurementController.swift in Sources */,
+				D84B42CD21EF94A9009D4260 /* PatientsController.swift in Sources */,
+				D883031221F26CEA00E57471 /* UIViewController+helpers.swift in Sources */,
+				D883031821F27BD300E57471 /* MeasurementsController.swift in Sources */,
+				D883031521F275FC00E57471 /* SessionsController.swift in Sources */,
 				D84B42CB21EF94A9009D4260 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
