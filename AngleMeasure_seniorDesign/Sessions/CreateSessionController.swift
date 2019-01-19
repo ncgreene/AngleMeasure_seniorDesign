@@ -37,7 +37,7 @@ class CreateSessionController: UIViewController {
         
         _ = setupWhiteBackground(height: 50)
         let nameLabel = setupNameLabel()
-        _ = setupNameTextField(nameLabel: nameLabel)
+        _ = setupNameTextField(nameLabel: nameLabel, name: nil)
     }
     
     @objc func handleSave() {

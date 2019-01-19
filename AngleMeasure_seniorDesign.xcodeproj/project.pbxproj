@@ -19,6 +19,8 @@
 		D883031D21F3601800E57471 /* CreatePatientController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D883031C21F3601800E57471 /* CreatePatientController.swift */; };
 		D883031F21F366B000E57471 /* UIView+helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D883031E21F366B000E57471 /* UIView+helpers.swift */; };
 		D883032121F36E7200E57471 /* CreateSessionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D883032021F36E7200E57471 /* CreateSessionController.swift */; };
+		D883032521F3888E00E57471 /* PatientManagerModels.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D883032321F3888E00E57471 /* PatientManagerModels.xcdatamodeld */; };
+		D883032721F388C400E57471 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D883032621F388C400E57471 /* CoreDataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +38,8 @@
 		D883031C21F3601800E57471 /* CreatePatientController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePatientController.swift; sourceTree = "<group>"; };
 		D883031E21F366B000E57471 /* UIView+helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+helpers.swift"; sourceTree = "<group>"; };
 		D883032021F36E7200E57471 /* CreateSessionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSessionController.swift; sourceTree = "<group>"; };
+		D883032421F3888E00E57471 /* PatientManagerModels.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PatientManagerModels.xcdatamodel; sourceTree = "<group>"; };
+		D883032621F388C400E57471 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,8 +78,9 @@
 				D883031621F27BA500E57471 /* Measurements */,
 				D883031B21F2802900E57471 /* Measurement */,
 				D883031021F26CAF00E57471 /* Helpers */,
-				D84B42CE21EF94A9009D4260 /* Main.storyboard */,
+				D883032221F3882600E57471 /* CoreData */,
 				D84B42D121EF94AA009D4260 /* Assets.xcassets */,
+				D84B42CE21EF94A9009D4260 /* Main.storyboard */,
 				D84B42D321EF94AA009D4260 /* LaunchScreen.storyboard */,
 				D84B42D621EF94AA009D4260 /* Info.plist */,
 			);
@@ -123,6 +128,15 @@
 				D883031921F27EF500E57471 /* MeasurementController.swift */,
 			);
 			path = Measurement;
+			sourceTree = "<group>";
+		};
+		D883032221F3882600E57471 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				D883032621F388C400E57471 /* CoreDataManager.swift */,
+				D883032321F3888E00E57471 /* PatientManagerModels.xcdatamodeld */,
+			);
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -197,6 +211,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D883031A21F27EF500E57471 /* MeasurementController.swift in Sources */,
+				D883032521F3888E00E57471 /* PatientManagerModels.xcdatamodeld in Sources */,
 				D84B42CD21EF94A9009D4260 /* PatientsController.swift in Sources */,
 				D883031D21F3601800E57471 /* CreatePatientController.swift in Sources */,
 				D883031221F26CEA00E57471 /* UIViewController+helpers.swift in Sources */,
@@ -205,6 +220,7 @@
 				D883032121F36E7200E57471 /* CreateSessionController.swift in Sources */,
 				D883031F21F366B000E57471 /* UIView+helpers.swift in Sources */,
 				D84B42CB21EF94A9009D4260 /* AppDelegate.swift in Sources */,
+				D883032721F388C400E57471 /* CoreDataManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -404,6 +420,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		D883032321F3888E00E57471 /* PatientManagerModels.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				D883032421F3888E00E57471 /* PatientManagerModels.xcdatamodel */,
+			);
+			currentVersion = D883032421F3888E00E57471 /* PatientManagerModels.xcdatamodel */;
+			path = PatientManagerModels.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = D84B42BF21EF94A9009D4260 /* Project object */;
 }

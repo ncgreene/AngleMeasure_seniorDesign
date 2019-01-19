@@ -7,20 +7,25 @@
 //
 
 import UIKit
+import CoreData
 
 // Custom Delegation
 protocol CreatePatientControllerDelegate {
-//    func didAddPatient(patient: Patient)
-//    func didEditPatient(patient: Patient)
+    func didAddPatient(patient: Patient)
+    func didEditPatient(patient: Patient)
 }
 
 class CreatePatientController: UIViewController {
     
+    var nameLabel: UILabel = UILabel()
+    var nameTextField: UITextField = UITextField()
+    var delegate: CreatePatientControllerDelegate?
+    var patient: Patient?
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-//        navigationItem.title = patient == nil ? "Create Patient" : "Edit Patient"
-        navigationItem.title = "Create Patient"
+        navigationItem.title = patient == nil ? "Create Patient" : "Edit Patient"
     }
     
     override func viewDidLoad() {
@@ -36,13 +41,55 @@ class CreatePatientController: UIViewController {
         setupSaveButtonInNavBar(selector: #selector(handleSave))
         
         _ = setupWhiteBackground(height: 50)
-        let nameLabel = setupNameLabel()
-        _ = setupNameTextField(nameLabel: nameLabel)
+        nameLabel = setupNameLabel()
+        nameTextField = setupNameTextField(nameLabel: nameLabel, name: patient?.name)
     }
     
     @objc func handleSave() {
-        print("still need to add save functionality -> CreatePatientController")
+        if patient == nil {
+            createPatient()
+        } else {
+            savePatientChanges()
+        }
     }
+    
+    fileprivate func savePatientChanges() {
+        
+        let context = CoreDataManager.shared.persistentContainer.viewContext
+        
+        patient?.name = nameTextField.text
+        
+        do {
+            try context.save()
+            //save successful
+            dismiss(animated: true) {
+                self.delegate?.didEditPatient(patient: self.patient!) //note: companies controller is that delegate
+            }
+        }catch let saveErr {
+            print("failed to save edit to patient: ", saveErr)
+        }
+        
+    }
+    
+    fileprivate func createPatient() {
+        let context = CoreDataManager.shared.persistentContainer.viewContext
+        
+        let patient = NSEntityDescription.insertNewObject(forEntityName: "Patient", into: context)
+        
+        patient.setValue(nameTextField.text, forKey: "name")
+        
+        do {
+            try context.save()
+            
+            // success
+            dismiss(animated: true) {
+                self.delegate?.didAddPatient(patient: patient as! Patient) //cast to Patient from NSManagedObject
+            }
+        } catch let saveErr {
+            print("Failed to save patient: \(saveErr)")
+        }
+    }
+    
 }
 
 

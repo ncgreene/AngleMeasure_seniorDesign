@@ -49,8 +49,11 @@ extension UIViewController {
         return nameLabel
     }
     
-    func setupNameTextField(nameLabel: UILabel) -> UITextField {
+    func setupNameTextField(nameLabel: UILabel, name: String?) -> UITextField {
         let nameTextField = UITextField()
+        if let nameText = name {
+            nameTextField.text = nameText
+        }
         nameTextField.placeholder = "Enter name here"
         nameTextField.translatesAutoresizingMaskIntoConstraints = false
         nameTextField.textAlignment = .left

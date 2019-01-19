@@ -8,13 +8,16 @@
 
 import UIKit
 
-class PatientsController: UITableViewController {
-
+class PatientsController: UITableViewController, CreatePatientControllerDelegate {
+    
     let cellId = "cellId"
-    let samplePatients = ["Nathan", "Mandy", "Josh"]
+    var patients = [Patient]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        patients = CoreDataManager.shared.fetchPatients()
+        print("here are the saved patients: \(patients)")
         
         setupUI()
     }
@@ -28,17 +31,33 @@ class PatientsController: UITableViewController {
     
     @objc func handleAddPatient() { // Modal
         let createPatientController = CreatePatientController()
+        createPatientController.delegate = self
         
         let navController = UINavigationController(rootViewController: createPatientController)
         
         present(navController, animated: true, completion: nil)
-        
+    }
+    
+    // MARK: Delegate
+    func didAddPatient(patient: Patient) {
+        print("did create: \(patient.name ?? "no patient")")
+        patients.append(patient)
+        let indexPath = IndexPath(row: patients.count - 1, section: 0)
+        tableView.insertRows(at: [indexPath], with: .automatic)
+    }
+    
+    func didEditPatient(patient: Patient) {
+        print("did edit: \(patient.name ?? "no patient")")
+        let row = patients.index(of: patient)
+        let reloadIndexPath = IndexPath(row: row!, section: 0)
+        tableView.reloadRows(at: [reloadIndexPath], with: .middle)
     }
     
     // MARK: UITableView
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
-        cell.textLabel?.text = samplePatients[indexPath.row]
+        let patient = patients[indexPath.row]
+        cell.textLabel?.text = patient.name
         return cell
     }
     
@@ -47,7 +66,7 @@ class PatientsController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return samplePatients.count
+        return patients.count
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -55,15 +74,13 @@ class PatientsController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let patientName = samplePatients[indexPath.row]
+        let patient = patients[indexPath.row]
         let sessionsController = SessionsController()
-        sessionsController.patientName = patientName
+        sessionsController.patient = patient
         
         navigationController?.pushViewController(sessionsController, animated: true)
     }
-    
-    
-    
+
     override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let label = UILabel()
         label.text = "No patients available..."
@@ -76,6 +93,39 @@ class PatientsController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return tableView.numberOfRows(inSection: 0) == 0 ? 150 : 0
     }
+    
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete") { (_, indexPath) in
+            let patient = self.patients[indexPath.row]
+            print("delete: ", patient.name ?? "")
+            
+            self.patients.remove(at: indexPath.row)
+            self.tableView.deleteRows(at: [indexPath], with: .automatic )
+            
+            let context = CoreDataManager.shared.persistentContainer.viewContext
+            context.delete(patient)
+            do {
+                try context.save()
+            } catch let saveErr {
+                print("Failed to save a deletion: \(saveErr)")
+            }
+        }
+        deleteAction.backgroundColor = .red
+        
+        let editAction = UITableViewRowAction(style: .normal, title: "Edit", handler: editHandler)
+        editAction.backgroundColor = .black
+        
+        return [deleteAction, editAction]
+    }
+    fileprivate func editHandler(action: UITableViewRowAction, indexPath: IndexPath) {
+        let editPatientController = CreatePatientController()
+        editPatientController.delegate = self
+        editPatientController.patient = patients[indexPath.row]
+        let navController = UINavigationController(rootViewController: editPatientController)
+        present(navController, animated: true, completion: nil)
+        
+    }
+    
 
 }
 

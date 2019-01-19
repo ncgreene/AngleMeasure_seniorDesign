@@ -9,14 +9,14 @@
 import UIKit
 
 class SessionsController: UITableViewController {
-    var patientName: String?
+    var patient: Patient?
     var sampleSessions = ["Jan 18, 2019", "Jan 20, 2019", "Jan 22, 2019"]
     let cellId = "cellId"
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        navigationItem.title = patientName
+        navigationItem.title = patient?.name
     }
     
     override func viewDidLoad() {
