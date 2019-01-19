@@ -26,8 +26,13 @@ class PatientsController: UITableViewController {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
     }
     
-    @objc func handleAddPatient() {
-        print("add patient")
+    @objc func handleAddPatient() { // Modal
+        let createPatientController = CreatePatientController()
+        
+        let navController = UINavigationController(rootViewController: createPatientController)
+        
+        present(navController, animated: true, completion: nil)
+        
     }
     
     // MARK: UITableView

@@ -16,6 +16,9 @@
 		D883031521F275FC00E57471 /* SessionsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D883031421F275FC00E57471 /* SessionsController.swift */; };
 		D883031821F27BD300E57471 /* MeasurementsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D883031721F27BD300E57471 /* MeasurementsController.swift */; };
 		D883031A21F27EF500E57471 /* MeasurementController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D883031921F27EF500E57471 /* MeasurementController.swift */; };
+		D883031D21F3601800E57471 /* CreatePatientController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D883031C21F3601800E57471 /* CreatePatientController.swift */; };
+		D883031F21F366B000E57471 /* UIView+helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D883031E21F366B000E57471 /* UIView+helpers.swift */; };
+		D883032121F36E7200E57471 /* CreateSessionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D883032021F36E7200E57471 /* CreateSessionController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +33,9 @@
 		D883031421F275FC00E57471 /* SessionsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionsController.swift; sourceTree = "<group>"; };
 		D883031721F27BD300E57471 /* MeasurementsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementsController.swift; sourceTree = "<group>"; };
 		D883031921F27EF500E57471 /* MeasurementController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementController.swift; sourceTree = "<group>"; };
+		D883031C21F3601800E57471 /* CreatePatientController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePatientController.swift; sourceTree = "<group>"; };
+		D883031E21F366B000E57471 /* UIView+helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+helpers.swift"; sourceTree = "<group>"; };
+		D883032021F36E7200E57471 /* CreateSessionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSessionController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +86,7 @@
 			isa = PBXGroup;
 			children = (
 				D84B42CC21EF94A9009D4260 /* PatientsController.swift */,
+				D883031C21F3601800E57471 /* CreatePatientController.swift */,
 			);
 			path = Patients;
 			sourceTree = "<group>";
@@ -88,6 +95,7 @@
 			isa = PBXGroup;
 			children = (
 				D883031121F26CEA00E57471 /* UIViewController+helpers.swift */,
+				D883031E21F366B000E57471 /* UIView+helpers.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -96,6 +104,7 @@
 			isa = PBXGroup;
 			children = (
 				D883031421F275FC00E57471 /* SessionsController.swift */,
+				D883032021F36E7200E57471 /* CreateSessionController.swift */,
 			);
 			path = Sessions;
 			sourceTree = "<group>";
@@ -189,9 +198,12 @@
 			files = (
 				D883031A21F27EF500E57471 /* MeasurementController.swift in Sources */,
 				D84B42CD21EF94A9009D4260 /* PatientsController.swift in Sources */,
+				D883031D21F3601800E57471 /* CreatePatientController.swift in Sources */,
 				D883031221F26CEA00E57471 /* UIViewController+helpers.swift in Sources */,
 				D883031821F27BD300E57471 /* MeasurementsController.swift in Sources */,
 				D883031521F275FC00E57471 /* SessionsController.swift in Sources */,
+				D883032121F36E7200E57471 /* CreateSessionController.swift in Sources */,
+				D883031F21F366B000E57471 /* UIView+helpers.swift in Sources */,
 				D84B42CB21EF94A9009D4260 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

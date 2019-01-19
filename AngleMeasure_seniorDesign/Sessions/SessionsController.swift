@@ -30,8 +30,10 @@ class SessionsController: UITableViewController {
         setupPlusButtonInNavBar(selector: #selector(handleAddSession))
     }
     
-    @objc func handleAddSession() {
-        print("add session")
+    @objc func handleAddSession() { // Modal
+        let createSessionController = CreateSessionController()
+        let navController = UINavigationController(rootViewController: createSessionController)
+        present(navController, animated: true, completion: nil)
     }
     
     

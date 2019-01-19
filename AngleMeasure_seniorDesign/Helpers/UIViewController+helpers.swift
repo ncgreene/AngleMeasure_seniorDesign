@@ -37,4 +37,27 @@ extension UIViewController {
         
         return whiteBackgroundView
     }
+    
+    func setupNameLabel() -> UILabel {
+        let nameLabel = UILabel()
+        nameLabel.text = "Name: "
+        nameLabel.translatesAutoresizingMaskIntoConstraints = false //enable autolayout
+        
+        view.addSubview(nameLabel)
+        _ = nameLabel.anchor(view.topAnchor, left: view.leftAnchor, bottom: nil, right: nil, topConstant: 0, leftConstant: 8, bottomConstant: 0, rightConstant: 0, widthConstant: 60, heightConstant: 50)
+        
+        return nameLabel
+    }
+    
+    func setupNameTextField(nameLabel: UILabel) -> UITextField {
+        let nameTextField = UITextField()
+        nameTextField.placeholder = "Enter name here"
+        nameTextField.translatesAutoresizingMaskIntoConstraints = false
+        nameTextField.textAlignment = .left
+        
+        view.addSubview(nameTextField)
+        _ = nameTextField.anchor(nameLabel.topAnchor, left: nameLabel.rightAnchor, bottom: nameLabel.bottomAnchor, right: view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+        
+        return nameTextField
+    }
 }
