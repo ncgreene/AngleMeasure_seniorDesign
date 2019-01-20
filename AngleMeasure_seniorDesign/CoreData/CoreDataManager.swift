@@ -22,10 +22,10 @@ struct CoreDataManager {
     }()
     
     func fetchPatients() -> [Patient] {
-        //attempt core data fetch
         let context = persistentContainer.viewContext
         
         let fetchRequest = NSFetchRequest<Patient>(entityName: "Patient")
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)] 
         
         do {
             let patients = try context.fetch(fetchRequest)
@@ -38,10 +38,10 @@ struct CoreDataManager {
     }
     
     func fetchSessions() -> [Session] {
-        //attempt core data fetch
         let context = persistentContainer.viewContext
         
         let fetchRequest = NSFetchRequest<Session>(entityName: "Session")
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
         
         do {
             let sessions = try context.fetch(fetchRequest)

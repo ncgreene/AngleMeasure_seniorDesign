@@ -17,9 +17,8 @@ class SessionsController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-//        sessions = CoreDataManager.shared.fetchSessions()
-        if let patientSessions = patient?.sessions?.allObjects as? [Session]  {
-            sessions = patientSessions
+        if let orderedSessions = patient?.sessions?.sortedArray(using: [NSSortDescriptor(key: "date", ascending: false)]) as? [Session] {
+            sessions = orderedSessions
         } else { sessions = [] }
         
         navigationItem.title = patient?.name
@@ -46,10 +45,12 @@ class SessionsController: UITableViewController {
         if let err = tuple.1 {
             print(err)
         } else {
-            self.sessions.append(tuple.0!)
+            self.sessions.insert(tuple.0!, at: 0)
             
-            let indexPath = IndexPath(row: self.sessions.count - 1, section: 0)
-            self.tableView.insertRows(at: [indexPath], with: .automatic)
+            let indexPath = IndexPath(row: 0, section: 0)
+            self.tableView.beginUpdates()
+            self.tableView.insertRows(at: [indexPath], with: .top)
+            self.tableView.endUpdates()
         }
     }
     

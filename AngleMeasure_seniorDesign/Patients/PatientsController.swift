@@ -39,9 +39,12 @@ class PatientsController: UITableViewController, CreatePatientControllerDelegate
     
     // MARK: Delegate
     func didAddPatient(patient: Patient) {
-        patients.append(patient)
-        let indexPath = IndexPath(row: patients.count - 1, section: 0)
-        tableView.insertRows(at: [indexPath], with: .automatic)
+        patients.insert(patient, at: 0)
+        
+        let indexPath = IndexPath(row: 0, section: 0)
+        self.tableView.beginUpdates()
+        self.tableView.insertRows(at: [indexPath], with: .top)
+        self.tableView.endUpdates()
     }
     
     func didEditPatient(patient: Patient) {
