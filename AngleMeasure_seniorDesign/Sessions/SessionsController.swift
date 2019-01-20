@@ -7,14 +7,20 @@
 //
 
 import UIKit
+import CoreData
 
 class SessionsController: UITableViewController {
     var patient: Patient?
-    var sampleSessions = ["Jan 18, 2019", "Jan 20, 2019", "Jan 22, 2019"]
+    var sessions = [Session]()
     let cellId = "cellId"
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+//        sessions = CoreDataManager.shared.fetchSessions()
+        if let patientSessions = patient?.sessions?.allObjects as? [Session]  {
+            sessions = patientSessions
+        } else { sessions = [] }
         
         navigationItem.title = patient?.name
     }
@@ -30,18 +36,35 @@ class SessionsController: UITableViewController {
         setupPlusButtonInNavBar(selector: #selector(handleAddSession))
     }
     
-    @objc func handleAddSession() { // Modal
-        let createSessionController = CreateSessionController()
-        let navController = UINavigationController(rootViewController: createSessionController)
-        present(navController, animated: true, completion: nil)
+    @objc func handleAddSession() {
+        
+        let currentDate = Date()
+        guard let patient = patient else { return }
+        
+        let tuple = CoreDataManager.shared.createSession(date: currentDate, patient: patient)
+        
+        if let err = tuple.1 {
+            print(err)
+        } else {
+            self.sessions.append(tuple.0!)
+            
+            let indexPath = IndexPath(row: self.sessions.count - 1, section: 0)
+            self.tableView.insertRows(at: [indexPath], with: .automatic)
+        }
     }
-    
-    
     
     // MARK: UITableView
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
-        cell.textLabel?.text = sampleSessions[indexPath.row]
+        
+        let session = sessions[indexPath.row]
+        
+        if let date = session.date {
+            let dateFormattedString = dateToString(date: date)
+            cell.textLabel?.text = dateFormattedString
+        } else {
+            cell.textLabel?.text = "No date found"
+        }
         return cell
     }
     
@@ -50,7 +73,7 @@ class SessionsController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return sampleSessions.count
+        return sessions.count
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -58,9 +81,9 @@ class SessionsController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let sessionName = sampleSessions[indexPath.row]
+        let session = sessions[indexPath.row]
         let measurementsController = MeasurementsController()
-        measurementsController.sessionName = sessionName
+        measurementsController.session = session
         
         navigationController?.pushViewController(measurementsController, animated: true)
     }
@@ -77,4 +100,25 @@ class SessionsController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return tableView.numberOfRows(inSection: 0) == 0 ? 150 : 0
     }
+    
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete") { (_, indexPath) in
+            let session = self.sessions[indexPath.row]
+            
+            self.sessions.remove(at: indexPath.row)
+            self.tableView.deleteRows(at: [indexPath], with: .automatic )
+            
+            let context = CoreDataManager.shared.persistentContainer.viewContext
+            context.delete(session)
+            do {
+                try context.save()
+            } catch let saveErr {
+                print("Failed to save a session deletion: \(saveErr)")
+            }
+        }
+        deleteAction.backgroundColor = .red
+        
+        return [deleteAction]
+    }
 }
+

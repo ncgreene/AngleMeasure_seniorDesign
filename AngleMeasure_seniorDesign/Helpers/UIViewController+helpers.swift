@@ -63,4 +63,11 @@ extension UIViewController {
         
         return nameTextField
     }
+    
+    func dateToString(date: Date) -> String {
+        let dateFormatter = DateFormatter() // MMM/DD/YYYY
+        dateFormatter.dateFormat = "MMM dd, yyyy"
+        let dateFormattedString = dateFormatter.string(from: date)
+        return dateFormattedString
+    }
 }

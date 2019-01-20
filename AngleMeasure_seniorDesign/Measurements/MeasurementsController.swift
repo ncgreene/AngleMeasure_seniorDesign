@@ -9,14 +9,22 @@
 import UIKit
 
 class MeasurementsController: UITableViewController {
-    var sessionName: String?
+    var session: Session?
     var sampleMeasurements = ["Stair steppers", "100m walks", "Bicycle"]
     let cellId = "cellId"
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        navigationItem.title = sessionName
+        if let date = session?.date {
+            let stringDate = dateToString(date: date)
+            navigationItem.title = stringDate
+        } else {
+            navigationItem.title = "No date"
+        }
+        
+        
+        
     }
     
     override func viewDidLoad() {

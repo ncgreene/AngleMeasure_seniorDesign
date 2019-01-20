@@ -17,7 +17,6 @@ class PatientsController: UITableViewController, CreatePatientControllerDelegate
         super.viewDidLoad()
         
         patients = CoreDataManager.shared.fetchPatients()
-        print("here are the saved patients: \(patients)")
         
         setupUI()
     }
@@ -40,14 +39,12 @@ class PatientsController: UITableViewController, CreatePatientControllerDelegate
     
     // MARK: Delegate
     func didAddPatient(patient: Patient) {
-        print("did create: \(patient.name ?? "no patient")")
         patients.append(patient)
         let indexPath = IndexPath(row: patients.count - 1, section: 0)
         tableView.insertRows(at: [indexPath], with: .automatic)
     }
     
     func didEditPatient(patient: Patient) {
-        print("did edit: \(patient.name ?? "no patient")")
         let row = patients.index(of: patient)
         let reloadIndexPath = IndexPath(row: row!, section: 0)
         tableView.reloadRows(at: [reloadIndexPath], with: .middle)
@@ -97,7 +94,6 @@ class PatientsController: UITableViewController, CreatePatientControllerDelegate
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete") { (_, indexPath) in
             let patient = self.patients[indexPath.row]
-            print("delete: ", patient.name ?? "")
             
             self.patients.remove(at: indexPath.row)
             self.tableView.deleteRows(at: [indexPath], with: .automatic )
