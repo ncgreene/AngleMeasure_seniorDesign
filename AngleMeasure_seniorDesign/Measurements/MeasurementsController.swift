@@ -8,9 +8,11 @@
 
 import UIKit
 
-class MeasurementsController: UITableViewController {
+class MeasurementsController: UITableViewController, CreateMeasurementControllerDelegate {
+    
     var session: Session?
-    var sampleMeasurements = ["Stair steppers", "100m walks", "Bicycle"]
+    var measurements = [Measurement]()
+//    var sampleMeasurements = ["Stair steppers", "100m walks", "Bicycle"]
     let cellId = "cellId"
     
     override func viewWillAppear(_ animated: Bool) {
@@ -22,26 +24,31 @@ class MeasurementsController: UITableViewController {
         } else {
             navigationItem.title = "No date"
         }
-        
-        
-        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        measurements = CoreDataManager.shared.fetchMeasurements()
         
         setupUI()
     }
     
     func setupUI() {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
+        setupPlusButtonInNavBar(selector: #selector(handleAdd))
     }
-    
+    @objc fileprivate func handleAdd() {
+        let createMeasurementController = CreateMeasurementController()
+        createMeasurementController.delegate = self
+        let navController = UINavigationController(rootViewController: createMeasurementController)
+        present(navController, animated: true, completion: nil)
+    }
     
     // MARK: UITableView
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
-        cell.textLabel?.text = sampleMeasurements[indexPath.row]
+        cell.textLabel?.text = measurements[indexPath.row].name
         return cell
     }
     
@@ -50,7 +57,7 @@ class MeasurementsController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return sampleMeasurements.count
+        return measurements.count
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -64,7 +71,7 @@ class MeasurementsController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let label = UILabel()
-        label.text = "No sessions available..."
+        label.text = "No measurements available..."
         label.textColor = .black
         label.textAlignment = .center
         label.font = UIFont.boldSystemFont(ofSize: 16)
@@ -73,6 +80,20 @@ class MeasurementsController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return tableView.numberOfRows(inSection: 0) == 0 ? 150 : 0
+    }
+    
+    // MARK: Delegate
+    func didAddMeasurement(measurement: Measurement) {
+        measurements.insert(measurement, at: 0)
+        
+        let indexPath = IndexPath(row: 0, section: 0)
+        self.tableView.beginUpdates()
+        self.tableView.insertRows(at: [indexPath], with: .top)
+        self.tableView.endUpdates()
+    }
+    
+    func didEditMeasurement(measurement: Measurement) {
+        print("Edited measurement with name: \(measurement.name ?? "no name found")")
     }
 }
 

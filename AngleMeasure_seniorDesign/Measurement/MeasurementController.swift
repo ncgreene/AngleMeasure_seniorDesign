@@ -20,6 +20,7 @@ class MeasurementController: UIViewController {
         super.viewDidLoad()
         
         setupUI()
+        
     }
     
     func setupUI() {

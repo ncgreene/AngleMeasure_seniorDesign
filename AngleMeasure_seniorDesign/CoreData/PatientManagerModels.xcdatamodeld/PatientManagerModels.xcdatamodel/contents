@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14460.32" systemVersion="18B75" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Measurement" representedClassName="Measurement" syncable="YES" codeGenerationType="class">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="Patient" representedClassName="Patient" syncable="YES" codeGenerationType="class">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="sessions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Session" inverseName="patient" inverseEntity="Session" syncable="YES"/>
@@ -11,5 +14,6 @@
     <elements>
         <element name="Patient" positionX="169.90234375" positionY="-37.625" width="128" height="73"/>
         <element name="Session" positionX="-93.2265625" positionY="0" width="128" height="73"/>
+        <element name="Measurement" positionX="54" positionY="18" width="128" height="60"/>
     </elements>
 </model>

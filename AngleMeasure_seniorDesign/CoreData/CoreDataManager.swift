@@ -53,6 +53,22 @@ struct CoreDataManager {
         }
     }
     
+    func fetchMeasurements() -> [Measurement] {
+        let context = persistentContainer.viewContext
+        
+        let fetchRequest = NSFetchRequest<Measurement>(entityName: "Measurement")
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+        
+        do {
+            let measurements = try context.fetch(fetchRequest)
+            return measurements
+            
+        } catch let fetchErr {
+            print("Failed to fetch session: \(fetchErr)")
+            return []
+        }
+    }
+    
     func createSession(date: Date, patient: Patient) -> (Session?, Error?) {
     
         let context = persistentContainer.viewContext
