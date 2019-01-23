@@ -28,6 +28,7 @@ class CreateMeasurementController: UIViewController {
     
     var delegate: CreateMeasurementControllerDelegate?
     var measurement: Measurement?
+    var session: Session?
     
     lazy var startButton: UIButton = {
         let button = UIButton(type: .system)
@@ -114,6 +115,8 @@ class CreateMeasurementController: UIViewController {
     @objc fileprivate func handleSave() {
         
         guard let measurementName = nameTextField.text else { return }
+        guard let session = session else { return }
+        let date = Date()
         
         if measurementName.isEmpty {
             showError(title: "No name found", message: "Please enter a name in the text field.")
@@ -123,6 +126,8 @@ class CreateMeasurementController: UIViewController {
             let measurement = NSEntityDescription.insertNewObject(forEntityName: "Measurement", into: context)
             
             measurement.setValue(measurementName, forKey: "name")
+            measurement.setValue(session, forKey: "session")
+            measurement.setValue(date, forKey: "date")
             
             do {
                 try context.save()

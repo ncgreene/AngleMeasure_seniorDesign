@@ -29,7 +29,10 @@ class MeasurementsController: UITableViewController, CreateMeasurementController
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        measurements = CoreDataManager.shared.fetchMeasurements()
+//        measurements = CoreDataManager.shared.fetchMeasurements()
+        if let orderedMeasurements = session?.measurements?.sortedArray(using: [NSSortDescriptor(key: "date", ascending: false)]) as? [Measurement] {
+            measurements = orderedMeasurements
+        } else { measurements = [] }
         
         setupUI()
     }
@@ -41,6 +44,7 @@ class MeasurementsController: UITableViewController, CreateMeasurementController
     @objc fileprivate func handleAdd() {
         let createMeasurementController = CreateMeasurementController()
         createMeasurementController.delegate = self
+        createMeasurementController.session = session
         let navController = UINavigationController(rootViewController: createMeasurementController)
         present(navController, animated: true, completion: nil)
     }
