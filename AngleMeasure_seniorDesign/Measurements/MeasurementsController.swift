@@ -12,7 +12,6 @@ class MeasurementsController: UITableViewController, CreateMeasurementController
     
     var session: Session?
     var measurements = [Measurement]()
-//    var sampleMeasurements = ["Stair steppers", "100m walks", "Bicycle"]
     let cellId = "cellId"
     
     override func viewWillAppear(_ animated: Bool) {
@@ -29,7 +28,6 @@ class MeasurementsController: UITableViewController, CreateMeasurementController
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        measurements = CoreDataManager.shared.fetchMeasurements()
         if let orderedMeasurements = session?.measurements?.sortedArray(using: [NSSortDescriptor(key: "date", ascending: false)]) as? [Measurement] {
             measurements = orderedMeasurements
         } else { measurements = [] }

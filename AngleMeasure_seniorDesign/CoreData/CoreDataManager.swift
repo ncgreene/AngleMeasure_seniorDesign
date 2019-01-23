@@ -12,7 +12,7 @@ struct CoreDataManager {
     static let shared = CoreDataManager() //singleton instance
 
     let persistentContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: "PatientManagerModels") //name needs to match the data model file
+        let container = NSPersistentContainer(name: "PatientManagerModels")
         container.loadPersistentStores { (storeDescription, err) in
             if let err = err {
                 fatalError("Loading of Persistent Store failed: \(err)")

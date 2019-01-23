@@ -61,9 +61,10 @@ class CreatePatientController: UIViewController {
         
         do {
             try context.save()
-            //save successful
+            
+            //success
             dismiss(animated: true) {
-                self.delegate?.didEditPatient(patient: self.patient!) //note: companies controller is that delegate
+                self.delegate?.didEditPatient(patient: self.patient!)
             }
         }catch let saveErr {
             print("failed to save edit to patient: ", saveErr)
