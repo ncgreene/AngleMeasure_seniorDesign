@@ -24,18 +24,18 @@ extension UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: selector)
     }
     
-    func setupWhiteBackground(height: CGFloat) -> UIView {
-        let whiteBackgroundView = UIView()
-        whiteBackgroundView.backgroundColor = .white
-        whiteBackgroundView.translatesAutoresizingMaskIntoConstraints = false
+    func setupPaleBlueBackground(height: CGFloat) -> UIView {
+        let paleBlueBackgroundView = UIView()
+        paleBlueBackgroundView.backgroundColor = .paleBlue
+        paleBlueBackgroundView.translatesAutoresizingMaskIntoConstraints = false
         
-        view.addSubview(whiteBackgroundView)
-        whiteBackgroundView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        whiteBackgroundView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        whiteBackgroundView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        whiteBackgroundView.heightAnchor.constraint(equalToConstant: height).isActive = true
+        view.addSubview(paleBlueBackgroundView)
+        paleBlueBackgroundView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        paleBlueBackgroundView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        paleBlueBackgroundView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        paleBlueBackgroundView.heightAnchor.constraint(equalToConstant: height).isActive = true
         
-        return whiteBackgroundView
+        return paleBlueBackgroundView
     }
     
     func setupNameLabel() -> UILabel {

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D81F33E321F9273C000C65EC /* UIColor+theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81F33E221F9273C000C65EC /* UIColor+theme.swift */; };
 		D84B42CB21EF94A9009D4260 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84B42CA21EF94A9009D4260 /* AppDelegate.swift */; };
 		D84B42CD21EF94A9009D4260 /* PatientsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84B42CC21EF94A9009D4260 /* PatientsController.swift */; };
 		D84B42D021EF94A9009D4260 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D84B42CE21EF94A9009D4260 /* Main.storyboard */; };
@@ -24,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D81F33E221F9273C000C65EC /* UIColor+theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+theme.swift"; sourceTree = "<group>"; };
 		D84B42C721EF94A9009D4260 /* AngleMeasure_seniorDesign.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AngleMeasure_seniorDesign.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D84B42CA21EF94A9009D4260 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D84B42CC21EF94A9009D4260 /* PatientsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientsController.swift; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 			children = (
 				D883031121F26CEA00E57471 /* UIViewController+helpers.swift */,
 				D883031E21F366B000E57471 /* UIView+helpers.swift */,
+				D81F33E221F9273C000C65EC /* UIColor+theme.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -219,6 +222,7 @@
 				D883031821F27BD300E57471 /* MeasurementsController.swift in Sources */,
 				D883031521F275FC00E57471 /* SessionsController.swift in Sources */,
 				D883031F21F366B000E57471 /* UIView+helpers.swift in Sources */,
+				D81F33E321F9273C000C65EC /* UIColor+theme.swift in Sources */,
 				D84B42CB21EF94A9009D4260 /* AppDelegate.swift in Sources */,
 				D883032721F388C400E57471 /* CoreDataManager.swift in Sources */,
 			);

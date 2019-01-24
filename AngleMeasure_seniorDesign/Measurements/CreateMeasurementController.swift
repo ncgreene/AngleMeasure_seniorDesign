@@ -90,7 +90,7 @@ class CreateMeasurementController: UIViewController {
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(handleCancel))
         setupSaveButtonInNavBar(selector: #selector(handleSave))
         
-        _ = setupWhiteBackground(height: 76)
+        _ = setupPaleBlueBackground(height: 76)
         
         view.addSubview(startButton)
         _ = startButton.anchor(view.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, topConstant: 8, leftConstant: 8, bottomConstant: 0, rightConstant: 8, widthConstant: 0, heightConstant: 60)

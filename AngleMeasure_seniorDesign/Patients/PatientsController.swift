@@ -22,6 +22,7 @@ class PatientsController: UITableViewController, CreatePatientControllerDelegate
     }
     
     func setupUI() {
+        
         navigationItem.title = "Patients"
         setupPlusButtonInNavBar(selector: #selector(handleAddPatient))
         
@@ -56,6 +57,7 @@ class PatientsController: UITableViewController, CreatePatientControllerDelegate
     // MARK: UITableView
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
+        cell.backgroundColor = .paleBlue
         let patient = patients[indexPath.row]
         cell.textLabel?.text = patient.name
         return cell

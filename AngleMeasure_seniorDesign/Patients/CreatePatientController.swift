@@ -40,7 +40,7 @@ class CreatePatientController: UIViewController {
         setupCancelButtonInNavBar()
         setupSaveButtonInNavBar(selector: #selector(handleSave))
         
-        _ = setupWhiteBackground(height: 50)
+        _ = setupPaleBlueBackground(height: 50)
         nameLabel = setupNameLabel()
         nameTextField = setupNameTextField(nameLabel: nameLabel, name: patient?.name)
     }
