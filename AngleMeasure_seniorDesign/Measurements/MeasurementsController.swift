@@ -85,6 +85,36 @@ class MeasurementsController: UITableViewController, CreateMeasurementController
         return tableView.numberOfRows(inSection: 0) == 0 ? 150 : 0
     }
     
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete") { (_, indexPath) in
+            let measurement = self.measurements[indexPath.row]
+            
+            self.measurements.remove(at: indexPath.row)
+            self.tableView.deleteRows(at: [indexPath], with: .automatic )
+            
+            let context = CoreDataManager.shared.persistentContainer.viewContext
+            context.delete(measurement)
+            do {
+                try context.save()
+            } catch let saveErr {
+                print("Failed to save a deletion: \(saveErr)")
+            }
+        }
+        deleteAction.backgroundColor = .red
+        
+        let editAction = UITableViewRowAction(style: .normal, title: "Edit", handler: editHandler)
+        editAction.backgroundColor = .black
+        
+        return [deleteAction, editAction]
+    }
+    fileprivate func editHandler(action: UITableViewRowAction, indexPath: IndexPath) {
+        let editMeasurementController = CreateMeasurementController()
+        editMeasurementController.delegate = self
+        editMeasurementController.measurement = measurements[indexPath.row]
+        let navController = UINavigationController(rootViewController: editMeasurementController)
+        present(navController, animated: true, completion: nil)
+    }
+    
     // MARK: Delegate
     func didAddMeasurement(measurement: Measurement) {
         measurements.insert(measurement, at: 0)

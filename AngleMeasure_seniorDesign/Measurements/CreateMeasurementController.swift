@@ -113,7 +113,14 @@ class CreateMeasurementController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     @objc fileprivate func handleSave() {
-        
+        if measurement == nil {
+            createMeasurement()
+        } else {
+            saveMeasurementChanges()
+        }
+    }
+    
+    fileprivate func createMeasurement() {
         guard let measurementName = nameTextField.text else { return }
         guard let session = session else { return }
         let date = Date()
@@ -128,7 +135,6 @@ class CreateMeasurementController: UIViewController {
             measurement.setValue(measurementName, forKey: "name")
             measurement.setValue(session, forKey: "session")
             measurement.setValue(date, forKey: "date")
-            
             do {
                 try context.save()
                 
@@ -139,9 +145,10 @@ class CreateMeasurementController: UIViewController {
             } catch let saveErr {
                 print("Failed to save measurement: \(saveErr)")
             }
-            
         }
-        
+    }
+    fileprivate func saveMeasurementChanges() {
+        print("add saving edits functionality later")
     }
     
     fileprivate func showError(title: String, message: String) {
