@@ -8,6 +8,21 @@
 
 import UIKit
 
+//extension UIToolbar {
+////    override open func layoutSubviews() {
+////        super.layoutSubviews()
+////
+////        var frame = self.bounds
+////        frame.size.height = 100
+////        self.frame = frame
+////    }
+//    override open func sizeThatFits(_ size: CGSize) -> CGSize {
+//        var size = super.sizeThatFits(size)
+//        size.height = 60
+//        return size
+//    }
+//}
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,10 +32,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        UINavigationBar.appearance().tintColor = .black
+        UINavigationBar.appearance().tintColor = .darkBrown
         UINavigationBar.appearance().barTintColor = .lightGray
         UINavigationBar.appearance().isTranslucent = false
         UINavigationBar.appearance().prefersLargeTitles = true
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.darkBrown]
+        UINavigationBar.appearance().largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.darkBrown]
         
         let navController = UINavigationController(rootViewController: PatientsController())
         

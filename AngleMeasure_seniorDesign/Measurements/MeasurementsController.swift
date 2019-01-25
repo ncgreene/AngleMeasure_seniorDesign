@@ -126,7 +126,11 @@ class MeasurementsController: UITableViewController, CreateMeasurementController
     }
     
     func didEditMeasurement(measurement: Measurement) {
-        print("Edited measurement with name: \(measurement.name ?? "no name found")")
+        let row = measurements.index(of: measurement)
+        let indexPath = IndexPath(row: row!, section: 0)
+        self.tableView.beginUpdates()
+        self.tableView.reloadRows(at: [indexPath], with: .middle)
+        self.tableView.endUpdates()
     }
 }
 

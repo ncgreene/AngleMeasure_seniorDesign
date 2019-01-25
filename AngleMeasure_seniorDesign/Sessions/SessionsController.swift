@@ -14,6 +14,15 @@ class SessionsController: UITableViewController {
     var sessions = [Session]()
     let cellId = "cellId"
     
+//    lazy var summaryButton: UIBarButtonItem = {
+//        let button = UIBarButtonItem(title: "Display Patient Summary", style: .plain, target: self, action: #selector(handleSummary))
+//        button.tintColor = .orange
+//        return button
+//    }()
+//    @objc func handleSummary() {
+//        print("show summary for \(patient?.name ?? "no name")")
+//    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -33,7 +42,9 @@ class SessionsController: UITableViewController {
     func setupUI() {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
         setupPlusButtonInNavBar(selector: #selector(handleAddSession))
-    }
+//        navigationController?.toolbar.barTintColor = .lightGray
+//        toolbarItems = [summaryButton]
+        }
     
     @objc func handleAddSession() {
         
@@ -67,6 +78,7 @@ class SessionsController: UITableViewController {
         } else {
             cell.textLabel?.text = "No date found"
         }
+        cell.textLabel?.textColor = .darkBrown
         return cell
     }
     
@@ -88,6 +100,23 @@ class SessionsController: UITableViewController {
         measurementsController.session = session
         
         navigationController?.pushViewController(measurementsController, animated: true)
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let button = UIButton(type: .roundedRect)
+        button.backgroundColor = .grayBlue
+        button.setTitle("View Patient Summary", for: .normal)
+        button.setTitleColor(.darkBrown, for: .normal)
+        button.addTarget(self, action: #selector(handleSummary), for: .touchUpInside)
+        button.isHidden = false
+        return button
+    }
+    @objc func handleSummary() {
+        print("show summary for \(patient?.name)")
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 50
     }
   
     override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
@@ -122,5 +151,7 @@ class SessionsController: UITableViewController {
         
         return [deleteAction]
     }
+    
+    
 }
 

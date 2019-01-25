@@ -86,6 +86,12 @@ class CreateMeasurementController: UIViewController {
         
         view.backgroundColor = .black
         
+        if let existingMeasurement = measurement {
+            nameTextField.text = existingMeasurement.name
+            nameTextField.isHidden = false
+            nameLabel.isHidden = false
+            startButton.isHidden = true
+        }
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(handleCancel))
         setupSaveButtonInNavBar(selector: #selector(handleSave))
@@ -148,7 +154,29 @@ class CreateMeasurementController: UIViewController {
         }
     }
     fileprivate func saveMeasurementChanges() {
-        print("add saving edits functionality later")
+        guard let measurementName = nameTextField.text else { return }
+//        guard let session = session else { return }
+//        guard let date = measurement.date else { return }
+        
+        if measurementName.isEmpty {
+            showError(title: "No name found", message: "Please enter a name in the text field.")
+        } else {
+            let context = CoreDataManager.shared.persistentContainer.viewContext
+            
+            measurement?.name = measurementName
+            
+            do {
+                try context.save()
+                
+                // success
+                dismiss(animated: true) {
+                    self.delegate?.didEditMeasurement(measurement: self.measurement!)
+                }
+            } catch let saveErr {
+                print("Failed to save measurement: \(saveErr)")
+            }
+        }
+        
     }
     
     fileprivate func showError(title: String, message: String) {
