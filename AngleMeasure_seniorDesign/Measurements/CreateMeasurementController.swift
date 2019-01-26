@@ -27,9 +27,10 @@ protocol CreateMeasurementControllerDelegate {
 class CreateMeasurementController: UIViewController {
     
     var delegate: CreateMeasurementControllerDelegate?
+    var angles = [Angle]()
     var measurement: Measurement?
     var session: Session?
-    
+
     lazy var startButton: UIButton = {
         let button = UIButton(type: .system)
         button.backgroundColor = .orange
