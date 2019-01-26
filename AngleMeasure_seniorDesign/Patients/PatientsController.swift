@@ -60,6 +60,7 @@ class PatientsController: UITableViewController, CreatePatientControllerDelegate
         cell.backgroundColor = .paleBlue
         let patient = patients[indexPath.row]
         cell.textLabel?.text = patient.name
+        cell.textLabel?.textColor = .darkBrown
         return cell
     }
     
@@ -86,7 +87,7 @@ class PatientsController: UITableViewController, CreatePatientControllerDelegate
     override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let label = UILabel()
         label.text = "No patients available..."
-        label.textColor = .black
+        label.textColor = .darkBrown
         label.textAlignment = .center
         label.font = UIFont.boldSystemFont(ofSize: 16)
         return label

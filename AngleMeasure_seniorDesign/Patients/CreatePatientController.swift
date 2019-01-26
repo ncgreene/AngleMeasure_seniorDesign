@@ -33,7 +33,7 @@ class CreatePatientController: UIViewController {
         
         setupUI()
 
-        view.backgroundColor = .black
+        view.backgroundColor = .darkBrown
     }
     
     func setupUI() {

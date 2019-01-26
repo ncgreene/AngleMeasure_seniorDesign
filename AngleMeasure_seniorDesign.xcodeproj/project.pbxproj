@@ -22,6 +22,7 @@
 		D883032521F3888E00E57471 /* PatientManagerModels.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D883032321F3888E00E57471 /* PatientManagerModels.xcdatamodeld */; };
 		D883032721F388C400E57471 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D883032621F388C400E57471 /* CoreDataManager.swift */; };
 		D883032921F6BD8D00E57471 /* CreateMeasurementController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D883032821F6BD8D00E57471 /* CreateMeasurementController.swift */; };
+		D88B340921FBCB4000D72704 /* SummaryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88B340821FBCB4000D72704 /* SummaryController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		D883032421F3888E00E57471 /* PatientManagerModels.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PatientManagerModels.xcdatamodel; sourceTree = "<group>"; };
 		D883032621F388C400E57471 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		D883032821F6BD8D00E57471 /* CreateMeasurementController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateMeasurementController.swift; sourceTree = "<group>"; };
+		D88B340821FBCB4000D72704 /* SummaryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +114,7 @@
 			isa = PBXGroup;
 			children = (
 				D883031421F275FC00E57471 /* SessionsController.swift */,
+				D88B340821FBCB4000D72704 /* SummaryController.swift */,
 			);
 			path = Sessions;
 			sourceTree = "<group>";
@@ -219,6 +222,7 @@
 				D883031D21F3601800E57471 /* CreatePatientController.swift in Sources */,
 				D883031221F26CEA00E57471 /* UIViewController+helpers.swift in Sources */,
 				D883032921F6BD8D00E57471 /* CreateMeasurementController.swift in Sources */,
+				D88B340921FBCB4000D72704 /* SummaryController.swift in Sources */,
 				D883031821F27BD300E57471 /* MeasurementsController.swift in Sources */,
 				D883031521F275FC00E57471 /* SessionsController.swift in Sources */,
 				D883031F21F366B000E57471 /* UIView+helpers.swift in Sources */,

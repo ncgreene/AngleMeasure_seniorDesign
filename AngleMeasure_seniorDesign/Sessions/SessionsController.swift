@@ -111,8 +111,11 @@ class SessionsController: UITableViewController {
         button.isHidden = false
         return button
     }
-    @objc func handleSummary() {
-        print("show summary for \(patient?.name)")
+    @objc func handleSummary() { //modal
+        let summaryController = SummaryController()
+        summaryController.patient = self.patient
+        let navController = UINavigationController(rootViewController: summaryController)
+        present(navController, animated: true, completion: nil)
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -122,7 +125,7 @@ class SessionsController: UITableViewController {
     override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let label = UILabel()
         label.text = "No sessions available..."
-        label.textColor = .black
+        label.textColor = .darkBrown
         label.textAlignment = .center
         label.font = UIFont.boldSystemFont(ofSize: 16)
         return label

@@ -52,6 +52,7 @@ class MeasurementsController: UITableViewController, CreateMeasurementController
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
         cell.backgroundColor = .paleBlue
         cell.textLabel?.text = measurements[indexPath.row].name
+        cell.textLabel?.textColor = .darkBrown
         return cell
     }
     
@@ -75,7 +76,7 @@ class MeasurementsController: UITableViewController, CreateMeasurementController
     override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let label = UILabel()
         label.text = "No measurements available..."
-        label.textColor = .black
+        label.textColor = .darkBrown
         label.textAlignment = .center
         label.font = UIFont.boldSystemFont(ofSize: 16)
         return label

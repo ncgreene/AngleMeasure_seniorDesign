@@ -84,7 +84,7 @@ class CreateMeasurementController: UIViewController {
     
     fileprivate func setupUI() {
         
-        view.backgroundColor = .black
+        view.backgroundColor = .darkBrown
         
         if let existingMeasurement = measurement {
             nameTextField.text = existingMeasurement.name
