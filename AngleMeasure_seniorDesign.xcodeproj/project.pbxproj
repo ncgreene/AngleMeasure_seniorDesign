@@ -23,6 +23,8 @@
 		D883032721F388C400E57471 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D883032621F388C400E57471 /* CoreDataManager.swift */; };
 		D883032921F6BD8D00E57471 /* CreateMeasurementController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D883032821F6BD8D00E57471 /* CreateMeasurementController.swift */; };
 		D88B340921FBCB4000D72704 /* SummaryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88B340821FBCB4000D72704 /* SummaryController.swift */; };
+		D88B340E22048F9600D72704 /* CoreBluetoothManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88B340D22048F9600D72704 /* CoreBluetoothManager.swift */; };
+		D88B3410220491AB00D72704 /* AngleCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88B340F220491AB00D72704 /* AngleCalculator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +46,8 @@
 		D883032621F388C400E57471 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		D883032821F6BD8D00E57471 /* CreateMeasurementController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateMeasurementController.swift; sourceTree = "<group>"; };
 		D88B340821FBCB4000D72704 /* SummaryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryController.swift; sourceTree = "<group>"; };
+		D88B340D22048F9600D72704 /* CoreBluetoothManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreBluetoothManager.swift; sourceTree = "<group>"; };
+		D88B340F220491AB00D72704 /* AngleCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AngleCalculator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +86,7 @@
 				D883031621F27BA500E57471 /* Measurements */,
 				D883031B21F2802900E57471 /* Measurement */,
 				D883031021F26CAF00E57471 /* Helpers */,
+				D88B340C22048F5200D72704 /* CoreBluetooth */,
 				D883032221F3882600E57471 /* CoreData */,
 				D84B42D121EF94AA009D4260 /* Assets.xcassets */,
 				D84B42CE21EF94A9009D4260 /* Main.storyboard */,
@@ -124,6 +129,7 @@
 			children = (
 				D883031721F27BD300E57471 /* MeasurementsController.swift */,
 				D883032821F6BD8D00E57471 /* CreateMeasurementController.swift */,
+				D88B340F220491AB00D72704 /* AngleCalculator.swift */,
 			);
 			path = Measurements;
 			sourceTree = "<group>";
@@ -143,6 +149,14 @@
 				D883032321F3888E00E57471 /* PatientManagerModels.xcdatamodeld */,
 			);
 			path = CoreData;
+			sourceTree = "<group>";
+		};
+		D88B340C22048F5200D72704 /* CoreBluetooth */ = {
+			isa = PBXGroup;
+			children = (
+				D88B340D22048F9600D72704 /* CoreBluetoothManager.swift */,
+			);
+			path = CoreBluetooth;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -216,6 +230,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D88B3410220491AB00D72704 /* AngleCalculator.swift in Sources */,
 				D883031A21F27EF500E57471 /* MeasurementController.swift in Sources */,
 				D883032521F3888E00E57471 /* PatientManagerModels.xcdatamodeld in Sources */,
 				D84B42CD21EF94A9009D4260 /* PatientsController.swift in Sources */,
@@ -227,6 +242,7 @@
 				D883031521F275FC00E57471 /* SessionsController.swift in Sources */,
 				D883031F21F366B000E57471 /* UIView+helpers.swift in Sources */,
 				D81F33E321F9273C000C65EC /* UIColor+theme.swift in Sources */,
+				D88B340E22048F9600D72704 /* CoreBluetoothManager.swift in Sources */,
 				D84B42CB21EF94A9009D4260 /* AppDelegate.swift in Sources */,
 				D883032721F388C400E57471 /* CoreDataManager.swift in Sources */,
 			);

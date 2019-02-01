@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import CoreBluetooth
 
 //UI Elements for Real Time Measurement
     // Bar: Cancel and Save
@@ -24,8 +25,10 @@ protocol CreateMeasurementControllerDelegate {
     func didEditMeasurement(measurement: Measurement)
 }
 
-class CreateMeasurementController: UIViewController {
+class CreateMeasurementController: UIViewController, CoreBluetoothDelegate, AngleCalculatorDelegate {
     
+    var bluetoothManager : CoreBluetoothManager = CoreBluetoothManager.shared
+    var angleCalculator = AngleCalculator()
     var delegate: CreateMeasurementControllerDelegate?
     var angles = [Angle]()
     var measurement: Measurement?
@@ -33,7 +36,7 @@ class CreateMeasurementController: UIViewController {
 
     lazy var startButton: UIButton = {
         let button = UIButton(type: .system)
-        button.backgroundColor = .orange
+        button.backgroundColor = .navyBlue
         button.setTitle("Start!", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.addTarget(self, action: #selector(handleStart), for: .touchUpInside)
@@ -41,8 +44,15 @@ class CreateMeasurementController: UIViewController {
         return button
     }()
     @objc func handleStart() {
-        stopButton.isHidden = false
-        startButton.isHidden = true
+        if bluetoothManager.myPeripherals.count == 2 { //both HM10s are connected
+            bluetoothManager.doReading = true
+            bluetoothManager.discoverCharacteristics()
+            stopButton.isHidden = false //show stop button after we have started
+            startButton.isHidden = true
+        } else {
+            showError(title: "HM10 not connected", message: "Please make sure both HM10's are powered on")
+            return
+        }
     }
     
     lazy var stopButton: UIButton = {
@@ -55,6 +65,9 @@ class CreateMeasurementController: UIViewController {
         return button
     }()
     @objc func handleStop() {
+        bluetoothManager.stopScanPeripheral()
+        bluetoothManager.disconnectPeripherals()
+        bluetoothManager.doReading = false
         nameLabel.isHidden = false
         nameTextField.isHidden = false
         stopButton.isHidden = true
@@ -80,12 +93,19 @@ class CreateMeasurementController: UIViewController {
         super.viewDidLoad()
         
         navigationItem.title = measurement == nil ? "Take Measurement" : "Edit Measurement"
+        initBluetooth()
         setupUI()
+    }
+    
+    fileprivate func initBluetooth() {
+        bluetoothManager.delegate = self
+        angleCalculator.delegate = self
+        bluetoothManager.startScanPeripheral()
     }
     
     fileprivate func setupUI() {
         
-        view.backgroundColor = .darkBrown
+        view.backgroundColor = .blackBrown
         
         if let existingMeasurement = measurement {
             nameTextField.text = existingMeasurement.name
@@ -184,6 +204,17 @@ class CreateMeasurementController: UIViewController {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
         present(alertController, animated: true, completion: nil)
+    }
+    
+    //MARK: - Delegates
+    func didReadValueForCharacteristic(_ peripheral: CBPeripheral, characteristic: CBCharacteristic) {
+        angleCalculator.calculateAngle(peripheral, characteristic: characteristic)
+    }
+    
+    func didCalculateAngle(angle: Double) {
+        let doubleStr = String(format: "%.2f", angle)
+        print(doubleStr)
+        stopButton.setTitle(doubleStr, for: .normal)
     }
 
 }
