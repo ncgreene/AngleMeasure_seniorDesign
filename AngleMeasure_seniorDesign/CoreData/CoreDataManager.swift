@@ -90,4 +90,26 @@ struct CoreDataManager {
         }
     }
     
+//    func createAngle(date: Date, measurement: Measurement, value: Double) -> (Angle?, Error?) {
+//        
+//        let context = persistentContainer.viewContext
+//        
+//        let angle = NSEntityDescription.insertNewObject(forEntityName: "Angle", into: context) as! Angle
+//        
+//        angle.date = date
+//        angle.measurement = measurement
+//        angle.value = value
+//        
+//        do {
+//            try context.save()
+//            
+//            // success
+//            return(angle, nil)
+//            
+//        } catch let saveErr {
+//            print("Failed to save session: \(saveErr)")
+//            return (nil, saveErr)
+//        }
+//    }
+    
 }

@@ -148,6 +148,7 @@ class CoreBluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDele
         for peripheral in myPeripherals.values {
             centralManager?.cancelPeripheralConnection(peripheral)
         }
+        myPeripherals = [String: CBPeripheral]()
     }
     
     func discoverCharacteristics() {

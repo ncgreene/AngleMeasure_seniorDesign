@@ -30,9 +30,10 @@ class CreateMeasurementController: UIViewController, CoreBluetoothDelegate, Angl
     var bluetoothManager : CoreBluetoothManager = CoreBluetoothManager.shared
     var angleCalculator = AngleCalculator()
     var delegate: CreateMeasurementControllerDelegate?
-    var angles = [Angle]()
+    var angles = [Double]()
     var measurement: Measurement?
     var session: Session?
+    var currentRangeOfMotion: Double = 0.0
 
     lazy var startButton: UIButton = {
         let button = UIButton(type: .system)
@@ -89,18 +90,22 @@ class CreateMeasurementController: UIViewController, CoreBluetoothDelegate, Angl
         return textField
     }()
     
+    override func viewWillAppear(_ animated: Bool) {
+        initBluetooth()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         navigationItem.title = measurement == nil ? "Take Measurement" : "Edit Measurement"
-        initBluetooth()
+        bluetoothManager.startScanPeripheral()
         setupUI()
     }
     
     fileprivate func initBluetooth() {
         bluetoothManager.delegate = self
         angleCalculator.delegate = self
-        bluetoothManager.startScanPeripheral()
+        
     }
     
     fileprivate func setupUI() {
@@ -136,7 +141,9 @@ class CreateMeasurementController: UIViewController, CoreBluetoothDelegate, Angl
         nameTextField.rightAnchor.constraint(equalTo: startButton.rightAnchor).isActive = true
     }
     @objc func handleCancel() {
-        //Note: need to handle bluetooth disconnect before dismissing
+        bluetoothManager.stopScanPeripheral()
+        bluetoothManager.disconnectPeripherals()
+        bluetoothManager.doReading = false
         dismiss(animated: true, completion: nil)
     }
     @objc fileprivate func handleSave() {
@@ -162,6 +169,7 @@ class CreateMeasurementController: UIViewController, CoreBluetoothDelegate, Angl
             measurement.setValue(measurementName, forKey: "name")
             measurement.setValue(session, forKey: "session")
             measurement.setValue(date, forKey: "date")
+            measurement.setValue(angles, forKey: "angles")
             do {
                 try context.save()
                 
@@ -214,7 +222,16 @@ class CreateMeasurementController: UIViewController, CoreBluetoothDelegate, Angl
     func didCalculateAngle(angle: Double) {
         let doubleStr = String(format: "%.2f", angle)
         print(doubleStr)
-        stopButton.setTitle(doubleStr, for: .normal)
+        self.angles.append(angle)
+        checkRangeOfMotion(currentAngle: angle)
     }
-
+    
+    //MARK: - Custom Functions
+    func checkRangeOfMotion(currentAngle: Double) {
+        if currentAngle > currentRangeOfMotion {
+            currentRangeOfMotion = currentAngle
+            let doubleStr = String(format: "%.2f", currentAngle)
+            stopButton.setTitle(doubleStr, for: .normal)
+        }
+    }
 }

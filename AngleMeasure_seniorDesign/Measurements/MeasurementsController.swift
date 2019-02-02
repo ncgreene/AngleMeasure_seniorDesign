@@ -118,6 +118,10 @@ class MeasurementsController: UITableViewController, CreateMeasurementController
     
     // MARK: Delegate
     func didAddMeasurement(measurement: Measurement) {
+        for angle in measurement.angles ?? [0.0] {
+            print(angle)
+        }
+        
         measurements.insert(measurement, at: 0)
         
         let indexPath = IndexPath(row: 0, section: 0)

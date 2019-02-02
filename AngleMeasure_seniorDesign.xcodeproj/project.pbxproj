@@ -25,6 +25,7 @@
 		D88B340921FBCB4000D72704 /* SummaryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88B340821FBCB4000D72704 /* SummaryController.swift */; };
 		D88B340E22048F9600D72704 /* CoreBluetoothManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88B340D22048F9600D72704 /* CoreBluetoothManager.swift */; };
 		D88B3410220491AB00D72704 /* AngleCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88B340F220491AB00D72704 /* AngleCalculator.swift */; };
+		D88B341222050FEF00D72704 /* Measurement.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88B341122050FEF00D72704 /* Measurement.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 		D88B340821FBCB4000D72704 /* SummaryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryController.swift; sourceTree = "<group>"; };
 		D88B340D22048F9600D72704 /* CoreBluetoothManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreBluetoothManager.swift; sourceTree = "<group>"; };
 		D88B340F220491AB00D72704 /* AngleCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AngleCalculator.swift; sourceTree = "<group>"; };
+		D88B341122050FEF00D72704 /* Measurement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Measurement.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,6 +149,7 @@
 			children = (
 				D883032621F388C400E57471 /* CoreDataManager.swift */,
 				D883032321F3888E00E57471 /* PatientManagerModels.xcdatamodeld */,
+				D88B341122050FEF00D72704 /* Measurement.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -232,6 +235,7 @@
 			files = (
 				D88B3410220491AB00D72704 /* AngleCalculator.swift in Sources */,
 				D883031A21F27EF500E57471 /* MeasurementController.swift in Sources */,
+				D88B341222050FEF00D72704 /* Measurement.swift in Sources */,
 				D883032521F3888E00E57471 /* PatientManagerModels.xcdatamodeld in Sources */,
 				D84B42CD21EF94A9009D4260 /* PatientsController.swift in Sources */,
 				D883031D21F3601800E57471 /* CreatePatientController.swift in Sources */,
