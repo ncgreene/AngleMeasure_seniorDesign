@@ -105,7 +105,6 @@ class CreateMeasurementController: UIViewController, CoreBluetoothDelegate, Angl
     fileprivate func initBluetooth() {
         bluetoothManager.delegate = self
         angleCalculator.delegate = self
-        
     }
     
     fileprivate func setupUI() {
@@ -170,6 +169,7 @@ class CreateMeasurementController: UIViewController, CoreBluetoothDelegate, Angl
             measurement.setValue(session, forKey: "session")
             measurement.setValue(date, forKey: "date")
             measurement.setValue(angles, forKey: "angles")
+            measurement.setValue(currentRangeOfMotion, forKey: "rangeOfMotion")
             do {
                 try context.save()
                 
@@ -184,8 +184,6 @@ class CreateMeasurementController: UIViewController, CoreBluetoothDelegate, Angl
     }
     fileprivate func saveMeasurementChanges() {
         guard let measurementName = nameTextField.text else { return }
-//        guard let session = session else { return }
-//        guard let date = measurement.date else { return }
         
         if measurementName.isEmpty {
             showError(title: "No name found", message: "Please enter a name in the text field.")
@@ -205,7 +203,6 @@ class CreateMeasurementController: UIViewController, CoreBluetoothDelegate, Angl
                 print("Failed to save measurement: \(saveErr)")
             }
         }
-        
     }
     
     fileprivate func showError(title: String, message: String) {

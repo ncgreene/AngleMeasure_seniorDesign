@@ -26,7 +26,7 @@ class SummaryController: UIViewController {
     }
     
     func setupUI() {
-        view.backgroundColor = .darkBrown
+        view.backgroundColor = .blackBrown
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(handleDone))
         

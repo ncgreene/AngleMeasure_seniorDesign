@@ -69,7 +69,9 @@ class MeasurementsController: UITableViewController, CreateMeasurementController
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let measurement = measurements[indexPath.row]
         let measurementController = MeasurementController()
+        measurementController.measurement = measurement
         navigationController?.pushViewController(measurementController, animated: true)
     }
     
