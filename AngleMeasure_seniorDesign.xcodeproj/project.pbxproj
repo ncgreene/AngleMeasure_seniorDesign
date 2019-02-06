@@ -202,7 +202,6 @@
 			isa = PBXGroup;
 			children = (
 				D883031921F27EF500E57471 /* MeasurementController.swift */,
-				D8AF62FF2207C08200B034F8 /* BaseGraphController.swift */,
 			);
 			path = Measurement;
 			sourceTree = "<group>";
@@ -245,6 +244,7 @@
 		D8AF630B2207C90800B034F8 /* Chart */ = {
 			isa = PBXGroup;
 			children = (
+				D8AF62FF2207C08200B034F8 /* BaseGraphController.swift */,
 				D8AF63012207C2CB00B034F8 /* BalloonMarker.swift */,
 			);
 			path = Chart;

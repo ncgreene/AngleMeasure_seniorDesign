@@ -114,6 +114,7 @@ class SessionsController: UITableViewController {
     @objc func handleSummary() { //modal
         let summaryController = SummaryController()
         summaryController.patient = self.patient
+        summaryController.sessions = self.sessions
         let navController = UINavigationController(rootViewController: summaryController)
         present(navController, animated: true, completion: nil)
     }

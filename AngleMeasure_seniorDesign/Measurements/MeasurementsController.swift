@@ -96,6 +96,19 @@ class MeasurementsController: UITableViewController, CreateMeasurementController
             self.tableView.deleteRows(at: [indexPath], with: .automatic )
             
             let context = CoreDataManager.shared.persistentContainer.viewContext
+            
+            if let session = self.session { //handle change of maxRangeOfMotion
+                var newMaxRoM: Double = 0.0
+                if measurement.rangeOfMotion > session.maxRangeOfMotion - 0.000000001 {
+                    for measure in session.measurements ?? [0.0] {
+                        let usableMeasure = measure as! Measurement
+                        if usableMeasure.rangeOfMotion > newMaxRoM && usableMeasure.rangeOfMotion < session.maxRangeOfMotion - 0.0000000001 { //needs to be both larger than the previous newMaxRoM and not equal to the old max range of motion
+                            newMaxRoM = usableMeasure.rangeOfMotion
+                        }
+                    }
+                    session.maxRangeOfMotion = newMaxRoM
+                }
+            }
             context.delete(measurement)
             do {
                 try context.save()
@@ -119,7 +132,8 @@ class MeasurementsController: UITableViewController, CreateMeasurementController
     }
     
     // MARK: Delegate
-    func didAddMeasurement(measurement: Measurement) {
+    func didAddMeasurement(measurement: Measurement, session: Session) {
+        print(session.maxRangeOfMotion)
         for angle in measurement.angles ?? [0.0] {
             print(angle)
         }

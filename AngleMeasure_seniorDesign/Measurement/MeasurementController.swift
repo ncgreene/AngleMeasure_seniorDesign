@@ -24,37 +24,6 @@ class MeasurementController: BaseGraphController {
         return chartView
     }()
     
-//    lazy var sliderX : UISlider = {
-//        let slider = UISlider()
-//        slider.translatesAutoresizingMaskIntoConstraints = false
-//        slider.addTarget(self, action: #selector(slidersValueChanged), for: .valueChanged)
-//        return slider
-//    }()
-//    lazy var sliderY : UISlider = {
-//        let slider = UISlider()
-//        slider.translatesAutoresizingMaskIntoConstraints = false
-//        slider.addTarget(self, action: #selector(slidersValueChanged), for: .valueChanged)
-//        return slider
-//    }()
-//    @objc func slidersValueChanged() {
-//        print(sliderX.value)
-//        sliderTextX.text = "\(Int(sliderX.value))"
-//        sliderTextY.text = "\(Int(sliderY.value))"
-//
-//        self.updateChartData()
-//    }
-    
-//    var sliderTextX: UITextField = {
-//        let tf = UITextField()
-//        tf.translatesAutoresizingMaskIntoConstraints = false
-//        return tf
-//    }()
-//    var sliderTextY: UITextField = {
-//        let tf = UITextField()
-//        tf.translatesAutoresizingMaskIntoConstraints = false
-//        return tf
-//    }()
-    
     lazy var rangeOfMotionLabel: UILabel = {
         let label = UILabel()
         if let rangeOfMotion = measurement?.rangeOfMotion {
@@ -81,15 +50,10 @@ class MeasurementController: BaseGraphController {
         updateChartData()
     }
     func setupUI() {
-        
         view.backgroundColor = .white
-//        let paleBlueBackground = setupPaleBlueBackground(height: 500)
         
         view.addSubview(rangeOfMotionLabel)
         _ = rangeOfMotionLabel.anchor(view.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, topConstant: 0, leftConstant: 8, bottomConstant: 0, rightConstant: 8, widthConstant: 0, heightConstant: 50)
-        
-//        view.addSubview(sliderX)
-//        _ = sliderX.anchor(nil, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, topConstant: 4, leftConstant: 8, bottomConstant: 8, rightConstant: 8, widthConstant: 0, heightConstant: 50)
         
         view.addSubview(chartView)
         _ = chartView.anchor(rangeOfMotionLabel.bottomAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
@@ -121,13 +85,13 @@ class MeasurementController: BaseGraphController {
         chartView.xAxis.gridLineDashLengths = [10, 10]
         chartView.xAxis.gridLineDashPhase = 0
         
-        let ll1 = ChartLimitLine(limit: 150, label: "Upper Limit")
+        let ll1 = ChartLimitLine(limit: 180, label: "Upper Limit")
         ll1.lineWidth = 4
         ll1.lineDashLengths = [5, 5]
         ll1.labelPosition = .rightTop
         ll1.valueFont = .systemFont(ofSize: 10)
         
-        let ll2 = ChartLimitLine(limit: -30, label: "Lower Limit")
+        let ll2 = ChartLimitLine(limit: 0, label: "Lower Limit")
         ll2.lineWidth = 4
         ll2.lineDashLengths = [5,5]
         ll2.labelPosition = .rightBottom
@@ -138,7 +102,7 @@ class MeasurementController: BaseGraphController {
         leftAxis.addLimitLine(ll1)
         leftAxis.addLimitLine(ll2)
         leftAxis.axisMaximum = 200
-        leftAxis.axisMinimum = -50
+        leftAxis.axisMinimum = -10
         leftAxis.gridLineDashLengths = [5, 5]
         leftAxis.drawLimitLinesBehindDataEnabled = true
         
@@ -157,10 +121,6 @@ class MeasurementController: BaseGraphController {
         
         chartView.legend.form = .line
         
-//        sliderX.value = 45
-//        sliderY.value = 100
-//        slidersValueChanged()
-        
         chartView.animate(xAxisDuration: 2.5)
     }
     
@@ -169,15 +129,17 @@ class MeasurementController: BaseGraphController {
             chartView.data = nil
             return
         }
-        
-        self.setDataCount(Int(40), range: UInt32(100)) // count and range
+        self.setData()
     }
     
-    func setDataCount(_ count: Int, range: UInt32) {
-        let values = (0..<count).map { (i) -> ChartDataEntry in
-            let val = Double(arc4random_uniform(range) + 3)
+    func setData() {
+        guard let doubleValues = measurement?.angles else { return }
+        var values = [ChartDataEntry]()
+        for (index, value) in doubleValues.enumerated() {
+            print(value)
             let icon = NSUIImage(named: "plus")
-            return ChartDataEntry(x: Double(i), y: val, icon: icon)
+            let entry = ChartDataEntry(x: Double(index), y: value, icon: icon)
+            values.append(entry)
         }
         
         let set1 = LineChartDataSet(values: values, label: "DataSet 1")

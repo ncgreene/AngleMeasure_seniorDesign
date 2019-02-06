@@ -21,7 +21,7 @@ import CoreBluetooth
     // Start -> Stop -> Download -> nameLabel/TextField
 
 protocol CreateMeasurementControllerDelegate {
-    func didAddMeasurement(measurement: Measurement)
+    func didAddMeasurement(measurement: Measurement, session: Session)
     func didEditMeasurement(measurement: Measurement)
 }
 
@@ -98,7 +98,9 @@ class CreateMeasurementController: UIViewController, CoreBluetoothDelegate, Angl
         super.viewDidLoad()
         
         navigationItem.title = measurement == nil ? "Take Measurement" : "Edit Measurement"
-        bluetoothManager.startScanPeripheral()
+        if measurement == nil {
+            bluetoothManager.startScanPeripheral()
+        }
         setupUI()
     }
     
@@ -157,6 +159,7 @@ class CreateMeasurementController: UIViewController, CoreBluetoothDelegate, Angl
         guard let measurementName = nameTextField.text else { return }
         guard let session = session else { return }
         let date = Date()
+        let values = angles.compactMap { $0 } //eliminate nil elements
         
         if measurementName.isEmpty {
             showError(title: "No name found", message: "Please enter a name in the text field.")
@@ -168,14 +171,20 @@ class CreateMeasurementController: UIViewController, CoreBluetoothDelegate, Angl
             measurement.setValue(measurementName, forKey: "name")
             measurement.setValue(session, forKey: "session")
             measurement.setValue(date, forKey: "date")
-            measurement.setValue(angles, forKey: "angles")
+            measurement.setValue(values, forKey: "angles")
             measurement.setValue(currentRangeOfMotion, forKey: "rangeOfMotion")
+            
+            //ALERTT : BIG CHANGE HERE
+            if currentRangeOfMotion > session.maxRangeOfMotion {
+                session.maxRangeOfMotion = currentRangeOfMotion
+            }
+            
             do {
                 try context.save()
                 
                 // success
                 dismiss(animated: true) {
-                    self.delegate?.didAddMeasurement(measurement: measurement as! Measurement)
+                    self.delegate?.didAddMeasurement(measurement: measurement as! Measurement, session: session)
                 }
             } catch let saveErr {
                 print("Failed to save measurement: \(saveErr)")
