@@ -226,10 +226,11 @@ class CreateMeasurementController: UIViewController, CoreBluetoothDelegate, Angl
     }
     
     func didCalculateAngle(angle: Double) {
-        let doubleStr = String(format: "%.2f", angle)
-        print(doubleStr)
-        self.angles.append(angle)
-        checkRangeOfMotion(currentAngle: angle)
+        let angleAdjustedByThirty = angle - 30.5
+        let doubleStr = String(format: "%.2f", angleAdjustedByThirty)
+//        print(doubleStr)
+        self.angles.append(angleAdjustedByThirty)
+        checkRangeOfMotion(currentAngle: angleAdjustedByThirty)
     }
     
     //MARK: - Custom Functions
@@ -239,5 +240,15 @@ class CreateMeasurementController: UIViewController, CoreBluetoothDelegate, Angl
             let doubleStr = String(format: "%.2f", currentAngle)
             stopButton.setTitle(doubleStr, for: .normal)
         }
+//        let doubleStr = String(format: "%.2f", currentAngle)
+//        stopButton.setTitle(doubleStr, for: .normal)
     }
 }
+
+
+
+
+
+
+
+//angular move

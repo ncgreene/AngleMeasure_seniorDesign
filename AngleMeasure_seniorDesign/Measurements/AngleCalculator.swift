@@ -49,6 +49,7 @@ class AngleCalculator {
                 if ((LL_value.range(of:"ENDL") != nil) && (peripheral.name == "SH-HC-08")) {
                     LL_value.removeLast(5)
                     LL_value = String(LL_value.filter { !"\r\n".contains($0) })
+                    print(LL_value)
                     LL_strQuat = strToQuat(text: LL_value)
                     angle = calcAngle(LLstrQuat: LL_strQuat, ULstrQuat: UL_strQuat, oldAngle: angle)
                     delegate?.didCalculateAngle(angle: angle)
@@ -57,6 +58,7 @@ class AngleCalculator {
                 } else if ((UL_value.range(of:"ENDL") != nil) && (peripheral.name == "DSD TECH")) {
                     UL_value.removeLast(5)
                     UL_value = String(UL_value.filter { !"\r\n".contains($0) })
+                    print(UL_value)
                     UL_strQuat = strToQuat(text: UL_value)
                     angle = calcAngle(LLstrQuat: LL_strQuat, ULstrQuat: UL_strQuat, oldAngle: angle)
                     delegate?.didCalculateAngle(angle: angle)
